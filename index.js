@@ -27,9 +27,9 @@ app.use("/api/users", userRoutes);
 
 mongoose
   .connect(process.env.Mongourl, {
-    // useNewUrlParser: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
     // useCreateIndex: true,
-    // useUnifiedTopology: true,
   })
   .then(() => {
     console.log("Connected to Mongo!");
