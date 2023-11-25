@@ -1,4 +1,5 @@
 import express, { urlencoded } from "express";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 import DbConnection from "./config/mongoose.js";
 import cookieParser from "cookie-parser";
@@ -8,7 +9,19 @@ import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
-DbConnection();
+// DbConnection();
+mongoose
+  .connect(process.env.Mongourl, {
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to Mongo!");
+  })
+  .catch((err) => {
+    console.error("Error connecting to Mongo", err);
+  });
 const app = express();
 
 const port = process.env.PORT || 6767;
